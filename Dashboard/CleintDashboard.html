@@ -25,11 +25,12 @@
             font-weight: 500;
         }
         .sidebar a:hover {
-            background-color: rgba(255, 255, 255, 0.1);
+            background-color: rgb(255, 255, 255);
             border-radius: 8px;
-        }
-        .sidebar i {
-            color: red;
+            color:#130f40;
+            .icon {
+                color: #130f40;
+            }
         }
         .down
         {
@@ -43,30 +44,31 @@
             <!-- Sidebar -->
             <div class="col-md-2 sidebar">
                 <h4 class="mb-5 mt-1">Task Manager</h3>
-                <a href="#" class="d-flex align-items-center p-2">
-                    <i class="fas fa-home me-2"></i> Home
+                <a href="?page=Home" class="d-flex align-items-center p-2">
+                    <i class="fas fa-home me-3 icon"></i> Home
                 </a>
-                <a href="#" class="d-flex align-items-center p-2">
-                    <i class="fas fa-tasks me-2"></i> Tasks
+                <a href="?page=Tasks" class="d-flex align-items-center p-2">
+                    <i class="fas fa-tasks me-3 icon"></i> Tasks
                 </a>
-                <a href="#" class="d-flex align-items-center p-2">
-                    <i class="fas fa-chart-bar me-2"></i> Review & Statistics
+                <a href="?page=Mission" class="d-flex align-items-center p-2">
+                    <i class="fas fa-file-alt me-3 icon"></i> Mission
                 </a>
-                <a href="#" class="d-flex align-items-center p-2">
-                    <i class="fas fa-file-alt me-2"></i> Documents
+                <a href="?page=Stats" class="d-flex align-items-center p-2">
+                    <i class="fas fa-chart-bar me-3 icon"></i> Review & Statistics
                 </a>
+                
                 <div class="mt-4 mb-3">OTHER</div>
 
-                <a href="#" class="d-flex align-items-center p-2">
-                    <i class="fas fa-user me-2"></i> Account
+                <a href="?page=Account" class="d-flex align-items-center p-2">
+                    <i class="fas fa-user me-3 icon"></i> Account
                 </a>
                 <div class="down">
-                <a href="#" class="btn btn-primary mt-2 w-100 ">Send a Task</a>
+                <a href="#" class="btn btn-primary mt-2 w-100 ">Create a Task</a>
                 <a href="#" class="btn btn-secondary mt-2 w-100">Logout</a>
             </div>
             </div>
 
-            <!-- Main Content -->
+            
             <div class="col-md-10">
             </div>
                 </div>
