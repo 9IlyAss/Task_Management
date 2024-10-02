@@ -1,21 +1,192 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="../bootstrap-5.3.3-dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
     <title>Document</title>
 </head>
+<style>
+    .card {
+        width: 200px;
+        height: 130px;
+
+    }
+
+    .paper {
+        font-size: 55px;
+        color: white;
+
+    }
+
+    .text {
+        color: white;
+    }
+
+    .Share {
+        background-color: #4834d4;
+        height: 150px;
+    }
+
+    .Share:hover {
+        background-color: #6655d6;
+    }
+
+    .card-title {
+        font-size: 40px;
+    }
+
+    .card-footer,
+    .card-text {
+        font-size: 20px;
+    }
+
+    .tasks {
+        height: 100px;
+    }
+
+    .task-card {
+        padding: 15px;
+        border-radius: 8px;
+    }
+
+    .tasks {
+        height: auto;
+    }
+
+    .task-status {
+        padding: 5px 10px;
+        border-radius: 5px;
+        color: white;
+        font-weight: bold;
+    }
+
+    .status-outstanding {
+        background-color: #28a745;
+    }
+</style>
+
 <body>
     <div class="container-fluid h-100">
         <div class="row h-100">
             <div class="col-md-2 sidebar">
                 
             </div>
-            <div class="col-md-10 bg-primary main-content">
-                
+            <div class="col-md-10 main-content mt-4">
+
+
+                <h3>Welcome</h3>
+                <!--*******************************************************************************************************
+*************************************************************************************************************-->
+                <div class="stats">
+                    <div class="row justify-content-center">
+                        <div class="col-auto">
+                            <div class="card text-center">
+                                <div class="card-body bg-danger">
+                                    <h5 class="card-title pt-3">125</h5>
+                                </div>
+                                <div class="card-footer text-body-secondary" style="background-color: #f74663 ;">
+                                    Tasks
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <div class="card text-center">
+                                <div class="card-body bg-warning">
+                                    <h5 class="card-title pt-3">125</h5>
+                                </div>
+                                <div class="card-footer text-body-secondary" style="background-color: #ffca2c ;">
+                                    Mission
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <div class="card text-center ">
+                                <div class="card-body bg-success">
+                                    <h5 class="card-title pt-3">125</h5>
+                                </div>
+                                <div class="card-footer text-body-secondary" style="background-color: #4caf50  ;">
+                                    Shared Tasks
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <div class="card text-center Share">
+                                <div class="card-body">
+                                    <i class="fa-solid fa-paper-plane paper pt-3"></i>
+                                    <p class="card-text pt-2 text">Share a Task</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--*******************************************************************************************************
+*************************************************************************************************************-->
+                <div class="container mt-3">
+                    <div class="row">
+
+
+                        <div class="col-8 p-3 rounded">
+                            <h4 class="text-white bg-primary p-2 rounded">Last Tasks</h4>
+                            <div class="card task-card w-100 tasks mb-2">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <h5 class="m-0">Helping Odd Job Day | Task</h5>
+                                        <p class="mb-0">Niels Van Weert | invited</p>
+                                    </div>
+                                    <span class="task-status status-outstanding">OUTSTANDING</span>
+                                </div>
+                            </div>
+                            <div class="card task-card w-100 tasks mb-2">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <h5 class="m-0">Helping Odd Job Day | Task</h5>
+                                        <p class="mb-0">Niels Van Weert | invited</p>
+                                    </div>
+                                    <span class="task-status status-outstanding">OUTSTANDING</span>
+                                </div>
+                            </div>
+                            <div class="card task-card w-100 tasks mb-2">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <h5 class="m-0">Helping Odd Job Day | Task</h5>
+                                        <p class="mb-0">Niels Van Weert | invited</p>
+                                    </div>
+                                    <span class="task-status status-outstanding">OUTSTANDING</span>
+                                </div>
+                            </div>
+                            <div class="card task-card w-100 tasks mb-2">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <h5 class="m-0">Helping Odd Job Day | Task</h5>
+                                        <p class="mb-0">Niels Van Weert | invited</p>
+                                    </div>
+                                    <span class="task-status status-outstanding bg-danger">OUTSTANDING</span>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <div class="col-4 p-3 rounded">
+                            <h5 class="text-white bg-primary p-2 rounded">Suggested Accounts</h5>
+
+                            <p class="text-white">Account 1</p>
+                            <p class="text-white">Account 2</p>
+                            <p class="text-white">Account 3</p>
+                            <h5 class="text-white bg-primary p-2 rounded">Missions</h5>
+                        </div>
+                    </div>
+
+
+                </div>
             </div>
         </div>
     </div>
 </body>
+
 </html>
