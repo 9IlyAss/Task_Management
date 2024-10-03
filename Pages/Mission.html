@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="../bootstrap-5.3.3-dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <title>Document</title>
+    <style>
+        h1 {
+            margin-top: 20px;
+            font-size: 2.5rem;
+            color: #343a40;
+            text-align: center;
+        }
+        /* Table styling */
+        .table {
+            background-color: #ffffff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .table th,
+        .table td {
+            vertical-align: middle;
+            text-align: center;
+        }
+
+        /* Buttons styling */
+        .btn-edit {
+            background-color: #28a745;
+            color: white;
+            border-radius: 20px;
+        }
+
+        .btn-delete {
+            background-color: #dc3545;
+            color: white;
+            border-radius: 20px;
+        }
+
+        .btn-edit:hover,
+        .btn-delete:hover {
+            opacity: 0.9;
+        }
+
+        /* Add some spacing to the table */
+        .table-container {
+            padding: 20px;
+            width: 1100px;
+        }
+
+        /* Responsive table on small screens */
+        @media (max-width: 768px) {
+            .table thead {
+                display: none;
+            }
+
+            .table tbody tr {
+                display: block;
+                margin-bottom: 20px;
+            }
+
+            .table tbody tr td {
+                display: block;
+                text-align: right;
+                position: relative;
+                padding-left: 50%;
+            }
+
+            .table tbody tr td::before {
+                content: attr(data-label);
+                position: absolute;
+                left: 0;
+                text-align: left;
+                font-weight: bold;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid h-100">
+        <div class="row h-100">
+            <div class="col-md-2 sidebar">
+
+            </div>
+            <div class="col-md-10 main-content mt-4">
+                <h1>Missions</h1>
+                <button type="button" class="btn btn-warning btn-lg mt-2">Create Mission</button>
+                <div class="table-container"></div>
+                    <table class="table table-hover table-bordered">
+                        <thead class="table-dark">
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Nom</th>
+                                <th scope="col">Description</th>
+                                <th scope="col">Résultat</th>
+                                <th scope="col">Priorité</th>
+                                <th scope="col" colspan="2">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">1</th>
+                                <td>Mark</td>
+                                <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem mollitia rerum rem accusamus molestiae quisquam explicabo possimus dolores, dicta, vel nihil soluta. Laborum vitae enim id ut, tenetur consectetur eaque.</td>
+                                <td>@mdo</td>
+                                <td>High</td>
+                                <td><button class="btn btn-edit btn-sm">Edit</button></td>
+                                <td><button class="btn btn-delete btn-sm">Delete</button></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">2</th>
+                                <td>Jacob</td>
+                                <td>Thornton</td>
+                                <td>@fat</td>
+                                <td>Medium</td>
+                                <td><button class="btn btn-edit btn-sm">Edit</button></td>
+                                <td><button class="btn btn-delete btn-sm">Delete</button></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">3</th>
+                                <td>Larry the Bird</td>
+                                <td>@twitter</td>
+                                <td>ffffff</td>
+                                <td>Low</td>
+                                <td><button class="btn btn-edit btn-sm">Edit</button></td>
+                                <td><button class="btn btn-delete btn-sm">Delete</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

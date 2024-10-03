@@ -1,3 +1,7 @@
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -70,14 +74,6 @@
 </style>
 
 <body>
-    <div class="container-fluid h-100">
-        <div class="row h-100">
-            <div class="col-md-2 sidebar">
-                
-            </div>
-            <div class="col-md-10 main-content mt-4">
-
-
                 <h3>Welcome</h3>
                 <!--*******************************************************************************************************
 *************************************************************************************************************-->
@@ -131,62 +127,25 @@
 
 
                         <div class="col-8 p-3 rounded">
+<!-------------------Last 4-->
                             <h4 class="text-white bg-primary p-2 rounded">Last Tasks</h4>
-                            <div class="card task-card w-100 tasks mb-2">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div>
-                                        <h5 class="m-0">Helping Odd Job Day | Task</h5>
-                                        <p class="mb-0">Niels Van Weert | invited</p>
-                                    </div>
-                                    <span class="task-status status-outstanding">OUTSTANDING</span>
-                                </div>
-                            </div>
-                            <div class="card task-card w-100 tasks mb-2">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div>
-                                        <h5 class="m-0">Helping Odd Job Day | Task</h5>
-                                        <p class="mb-0">Niels Van Weert | invited</p>
-                                    </div>
-                                    <span class="task-status status-outstanding">OUTSTANDING</span>
-                                </div>
-                            </div>
-                            <div class="card task-card w-100 tasks mb-2">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div>
-                                        <h5 class="m-0">Helping Odd Job Day | Task</h5>
-                                        <p class="mb-0">Niels Van Weert | invited</p>
-                                    </div>
-                                    <span class="task-status status-outstanding">OUTSTANDING</span>
-                                </div>
-                            </div>
-                            <div class="card task-card w-100 tasks mb-2">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div>
-                                        <h5 class="m-0">Helping Odd Job Day | Task</h5>
-                                        <p class="mb-0">Niels Van Weert | invited</p>
-                                    </div>
-                                    <span class="task-status status-outstanding bg-danger">OUTSTANDING</span>
-                                </div>
-                            </div>
+                                    <?php include("../Functions/Last4.php"); ?>
                         </div>
 
 
 
                         <div class="col-4 p-3 rounded">
+<!-------------------Suggested Accounts-->                           
                             <h5 class="text-white bg-primary p-2 rounded">Suggested Accounts</h5>
 
-                            <p class="text-white">Account 1</p>
-                            <p class="text-white">Account 2</p>
-                            <p class="text-white">Account 3</p>
+
                             <h5 class="text-white bg-primary p-2 rounded">Missions</h5>
                         </div>
                     </div>
 
 
                 </div>
-            </div>
-        </div>
-    </div>
+            
 </body>
 
 </html>
