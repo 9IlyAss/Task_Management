@@ -4,7 +4,8 @@ include("../dbconn.php");
 
 $message = '';
 $style = '';
-
+$Etat="user";
+$Droit="desactive";
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST["Email"];
     $Name = $_POST["Name"];
@@ -25,11 +26,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $message = "The Email Already Exists!";
             $style = "danger";
         } else {
-            $sql = "INSERT INTO USERS (Nom,Email,Password,Etat,Droit) VALUES (?, ?, ?);";
+            $sql = "INSERT INTO USERS (Nom,Email,Password,Etat,Droit) VALUES (?,?,?,?,?);";
             $stmt = $conn->prepare($sql);
-            $stmt->bind_param("sssss", $Name, $email, $Password,$Etat,$Droit);
+            $stmt->bind_param("sssss", $Name, $email,$Password,$Etat,$Droit);
             $stmt->execute();
-            $message = "You have successfully signed up! <a href='login.php' class='alert-link'>Click here to log in</a>";
+            $message = "You have successfully signed up! <a href='Login.php' class='alert-link'>Click here to log in</a>";
             $style = "warning";
         }
         $stmt->close();

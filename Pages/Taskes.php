@@ -82,8 +82,6 @@
 </head>
 
 <body>
-    <div class="container-fluid h-100">
-        <div class="row h-100 justify-content-center">
             <div class="col-md-10 col-lg-8">
                 <h1>Tasks</h1>
 
@@ -91,7 +89,6 @@
                     <table class="table table-hover table-bordered">
                         <thead class="table-dark">
                             <tr>
-                                <th scope="col">#</th>
                                 <th scope="col">Nom</th>
                                 <th scope="col">Description</th>
                                 <th scope="col">Résultat</th>
@@ -100,33 +97,10 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>Mark</td>
-                                <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem mollitia rerum rem accusamus molestiae quisquam explicabo possimus dolores, dicta, vel nihil soluta. Laborum vitae enim id ut, tenetur consectetur eaque.</td>
-                                <td>@mdo</td>
-                                <td>High</td>
-                                <td><button class="btn btn-edit btn-sm">Edit</button></td>
-                                <td><button class="btn btn-delete btn-sm">Delete</button></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">2</th>
-                                <td>Jacob</td>
-                                <td>Thornton</td>
-                                <td>@fat</td>
-                                <td>Medium</td>
-                                <td><button class="btn btn-edit btn-sm">Edit</button></td>
-                                <td><button class="btn btn-delete btn-sm">Delete</button></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">3</th>
-                                <td>Larry the Bird</td>
-                                <td>@twitter</td>
-                                <td>ffffff</td>
-                                <td>Low</td>
-                                <td><button class="btn btn-edit btn-sm">Edit</button></td>
-                                <td><button class="btn btn-delete btn-sm">Delete</button></td>
-                            </tr>
+
+                        <!---->
+
+
                         </tbody>
                     </table>
                 </div>

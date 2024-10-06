@@ -74,10 +74,29 @@
 </style>
 
 <body>
-                <h3>Welcome</h3>
+                <h3>Welcome <?php echo $_SESSION["Name"]; ?> </h3>
                 <!--*******************************************************************************************************
 *************************************************************************************************************-->
-                <div class="stats">
+<?php if(isset($_SESSION["success"])): ?>
+
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+    <strong>Success !! </strong> <?php echo $_SESSION["success"]; ?>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div> 
+<?php unset($_SESSION["success"]); ?>
+<?php endif; ?>
+
+<?php if(isset($_SESSION["failed"])): ?>
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <strong>Failed !! </strong> <?php echo $_SESSION["failed"]; ?>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div> 
+<?php unset($_SESSION["failed"]); ?>
+<?php endif; ?>
+
+
+
+<div class="stats">
                     <div class="row justify-content-center">
                         <div class="col-auto">
                             <div class="card text-center">
@@ -127,25 +146,27 @@
 
 
                         <div class="col-8 p-3 rounded">
-<!-------------------Last 4-->
+<!-------------------Last 4----->
                             <h4 class="text-white bg-primary p-2 rounded">Last Tasks</h4>
-                                    <?php include("../Functions/Last4.php"); ?>
-                        </div>
+                                    <?php #include("../Functions/Last4.php"); ?>
+                        </div> 
 
 
 
                         <div class="col-4 p-3 rounded">
 <!-------------------Suggested Accounts-->                           
                             <h5 class="text-white bg-primary p-2 rounded">Suggested Accounts</h5>
-
+                                    <?php #include("../Functions/SuggestedAcc.php"); ?>
 
                             <h5 class="text-white bg-primary p-2 rounded">Missions</h5>
+                                    <?php #include("../Functions/Last4.php"); ?>
                         </div>
                     </div>
 
 
                 </div>
-            
+                <script src="bootstrap-5.3.3-dist/js/bootstrap.min.js"></script>
+
 </body>
 
 </html>

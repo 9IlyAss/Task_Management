@@ -67,10 +67,15 @@ $row = $result->fetch_assoc();
 
 if ($row['Count'] == 0) 
 {
+    $adminName = "Admin";
+        $adminRole = "admin";
+        $adminStatus = "active";
+        $adminEmail = "Admin@gmail.com";
+        $Password="Admin12";
     $sql="INSERT INTO USERS (Nom,Droit,Etat,Email,Password)
             VALUES (?,?,?,?,?)";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("sssss","Admin","admin","active","Admin@gmail.com","Admin12");
+    $stmt->bind_param("sssss", $adminName, $adminRole, $adminStatus, $adminEmail, $Password);
     $stmt->execute();
     $stmt->close();
 }

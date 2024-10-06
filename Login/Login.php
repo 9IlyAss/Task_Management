@@ -35,18 +35,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     // $stmt->execute();
                     // $message = "You have successfully signed up! <a href='Login.php' class='alert-link'>Click here to log in</a>";
                     // $style = "warning";
-                    if($Etat==="desactive")
-                        $message="The Account is not Activated yet !";
-                    else
+                    // if($Etat==="desactive")
+                    //     $message="The Account is not Activated yet !";
+                    // else
                     {
                         $_SESSION["Email"] = $dbEmail;
                         $_SESSION["Name"] = $dbName;
                         $_SESSION["ID"]=$dbUserID;
                         
                         if($dbEmail==="Admin@gmail.com")
-                            header("Location: /Pages/AdminPage.php");
+                            header("Location: ../Dashboard/AdminDashboard.php");
                         else
-                            header("Location: /Pages/ClienPage.php");
+                            header("Location: ../Dashboard/CleintDashboard.php");
                         exit();
                     }
                 }
