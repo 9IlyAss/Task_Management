@@ -14,6 +14,7 @@ function AllTasks($userID)
     if ($result) {
         while ($row = $result->fetch_assoc()) {
             echo "<tr>
+                    <td>{$row['Mission_id']}</td>
                     <td>{$row['Nom']}</td>
                     <td>{$row['Desc']}</td>
                     <td>{$row['resultat']}</td>

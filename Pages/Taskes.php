@@ -51,33 +51,6 @@
             padding: 20px;
             width: 1100px;
         }
-
-        /* Responsive table on small screens */
-        @media (max-width: 768px) {
-            .table thead {
-                display: none;
-            }
-
-            .table tbody tr {
-                display: block;
-                margin-bottom: 20px;
-            }
-
-            .table tbody tr td {
-                display: block;
-                text-align: right;
-                position: relative;
-                padding-left: 50%;
-            }
-
-            .table tbody tr td::before {
-                content: attr(data-label);
-                position: absolute;
-                left: 0;
-                text-align: left;
-                font-weight: bold;
-            }
-        }
     </style>
 </head>
 
@@ -89,6 +62,7 @@
                     <table class="table table-hover table-bordered">
                         <thead class="table-dark">
                             <tr>
+                                <th scope="col">Mission Number</th>
                                 <th scope="col">Nom</th>
                                 <th scope="col">Description</th>
                                 <th scope="col">Résultat</th>
@@ -97,7 +71,10 @@
                             </tr>
                         </thead>
                         <tbody>
-
+                            <?php   
+                                    include ("../Functions/Tasks.php");
+                                    AllTasks(1);
+                                ?>
                         <!---->
 
 
