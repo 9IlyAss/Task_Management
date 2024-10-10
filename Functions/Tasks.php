@@ -1,15 +1,15 @@
+
 <?php
-session_start();
 
 function AllTasks($userID)
 {
     include("../dbconn.php");
 
     $sql = "SELECT * FROM tasks WHERE User_id = ?;";
-    $sql = $conn->prepare($sql);
-    $sql->bind_param("i", $userID);
-    $sql->execute();
-    $result = $sql->get_result();
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $userID);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
     if ($result) {
         while ($row = $result->fetch_assoc()) {
@@ -29,17 +29,18 @@ function AllTasks($userID)
     }
 }
 
-function AddTask($userID, $NomT, $DescT, $resultat, $Priorite,$MissionId)
+function AddTask($userID, $NomT, $DescT, $resultat, $Priorite, $MissionId)
 {
     include("../dbconn.php");
 
-    $sql = "INSERT INTO tasks (Nom, Desc, resultat, Priorite, User_id,Mission_id) VALUES (?, ?, ?, ?, ?);";
-    $sql = $conn->prepare($sql);
-    $sql->bind_param("sssii", $NomT, $DescT, $resultat, $Priorite, $userID,$MissionId);
-    $sql->execute();
+    $sql = "INSERT INTO tasks (Nom, `Desc`, resultat, Priorite, User_id, Mission_id) VALUES (?, ?, ?, ?, ?, ?);";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("sssiii", $NomT, $DescT, $resultat, $Priorite, $userID, $MissionId);
 
-    if ($sql) {
+    if ($stmt->execute()) {
         return "Task Created successfully";
+    } else {
+        return "Error: " . $conn->error;
     }
 }
 
@@ -48,12 +49,13 @@ function UpdateTasks($userID, $TaskID, $NomT, $DescT, $resultat, $Priorite)
     include("../dbconn.php");
 
     $sql = "UPDATE tasks SET Nom = ?, `Desc` = ?, resultat = ?, Priorite = ? WHERE User_id = ? AND id = ?;";
-    $sql = $conn->prepare($sql);
-    $sql->bind_param("sssiii", $NomT, $DescT, $resultat, $Priorite, $userID, $TaskID);
-    $sql->execute();
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("sssiii", $NomT, $DescT, $resultat, $Priorite, $userID, $TaskID);
 
-    if ($sql) {
+    if ($stmt->execute()) {
         return "Task Updated successfully";
+    } else {
+        return "Error: " . $conn->error;
     }
 }
 
@@ -62,12 +64,13 @@ function DeleteTasks($userID, $TaskID)
     include("../dbconn.php");
 
     $sql = "DELETE FROM tasks WHERE User_id = ? AND id = ?;";
-    $sql = $conn->prepare($sql);
-    $sql->bind_param("ii", $userID, $TaskID);
-    $sql->execute();
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("ii", $userID, $TaskID);
 
-    if ($sql) {
+    if ($stmt->execute()) {
         return "Task Deleted successfully";
+    } else {
+        return "Error: " . $conn->error;
     }
 }
 ?>

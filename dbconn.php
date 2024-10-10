@@ -21,7 +21,7 @@ $sql = "CREATE TABLE IF NOT EXISTS USERS (
 );";
 $conn->query($sql);
 
-// Missions table
+
 $sql = "CREATE TABLE IF NOT EXISTS Missions (
     id int AUTO_INCREMENT PRIMARY KEY,
     Nom varchar(30),

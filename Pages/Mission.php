@@ -3,17 +3,11 @@ include("../Functions/Mission.php");
 
 $message = '';
 $style = '';
-
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST["Nom"])) {
         $NomM = $_POST["Nom"];
         $DescM = $_POST["Desc"];
     }
-    if (isset($_POST["NomU"])) {
-        $NomMU = $_POST["NomU"];
-        $DescMU = $_POST["DescU"];
-    }
-
     if (isset($_POST["add"])) {   
         $_SESSION["success"] = AddMission($_SESSION["ID"], $NomM, $DescM);
         $style = "success"; 
@@ -22,10 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST["actionDelete"])) {
         $_SESSION["success"] = DeleteMission($_SESSION["ID"], $_POST["ID"]);
     }
-
-    if (isset($_POST["Update"]) && isset($_POST["ID"])) {   
-        $_SESSION["update"] = UpdateMission($_SESSION["ID"], $NomMU, $DescMU, $_POST["ID"]);
-    }
+    
 }
 ?>
 
@@ -89,7 +80,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <div class="form-group mb-3">
                             <textarea class="form-control" placeholder="Mission Description" name="Desc" rows="4" required></textarea>
                         </div>
-                        <input type="hidden" name="User_id" value="<?php echo $_SESSION['ID']; ?>"> 
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         <button type="submit" class="btn btn-primary">Add Mission</button>
                     </form>

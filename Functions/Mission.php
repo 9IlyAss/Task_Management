@@ -11,14 +11,16 @@ function AllMission($userID) {
     if ($result && $result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
             echo '<tr>
-                    <td>' . htmlspecialchars($row["Nom"]) . '</td>
-                    <td>' . htmlspecialchars($row["Desc"]) . '</td>
+                    <td>' . $row["Nom"] . '</td>
+                    <td>' . $row["Desc"] . '</td>
                     <td>' . $result->num_rows . '</td>
-                    <form method="POST">
+                    <form action="" method="POST">
                         <input type="hidden" name="ID" value="' . $row["id"] . '">
                         <td><button type="submit" class="btn btn-success" name="actionTasks" value="Tasks">Tasks</button></td>
                         <td><button type="submit" class="btn btn-danger" name="actionDelete" value="delete">Delete</button></td>
-                        <td><button type="button" class="btn btn-warning" onclick="window.location.href=\'../Pages/update.php?id=' . $row['id'] . '\'">Update</button></td>
+                        <td>
+                            <button type="button" class="btn btn-warning" onclick="window.location.href=\'../Pages/update.php?id=' . $row['id'] . '&Nom=' . urlencode($row['Nom']) . '&Des=' . urlencode($row['Desc']) . '\'">Update</button>
+                        </td>
                         <td><button type="submit" class="btn btn-primary" name="actionShare" value="Share">Share</button></td>
                     </form>
                 </tr>';
@@ -27,6 +29,7 @@ function AllMission($userID) {
         echo "<tr><td colspan='7'>No missions found.</td></tr>";
     }
 }
+
 
 function GetMission($missionID) {
     include("../dbconn.php");
