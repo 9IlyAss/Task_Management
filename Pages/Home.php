@@ -77,9 +77,7 @@
                 <h3>Welcome <?php echo $_SESSION["Name"]; ?> </h3>
                 <!--*******************************************************************************************************
 *************************************************************************************************************-->
-<?php echo $_SESSION["Email"];
-                        echo $_SESSION["Name"];
-                        echo $_SESSION["ID"];
+<?php 
 if(isset($_SESSION["success"])): ?>
 
 <div class="alert alert-warning alert-dismissible fade show" role="alert">

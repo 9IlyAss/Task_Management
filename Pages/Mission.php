@@ -46,6 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <table class="table table-hover table-bordered">
             <thead class="table-dark">
                 <tr>
+                    <th scope="col"># Mission ID</th>
                     <th scope="col">Nom</th>
                     <th scope="col">Description</th>
                     <th scope="col">Nbr Tasks</th>

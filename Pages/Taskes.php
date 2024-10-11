@@ -5,7 +5,7 @@ $message = '';
 $style = '';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    
+
     if (isset($_POST["NomT"])) {
         $NomT = $_POST["NomT"];
         $DescT = $_POST["DescT"];
@@ -14,9 +14,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $res = $_POST["resultat"];
     }
 
-    if (isset($_POST["add"])) {   
+    if (isset($_POST["add"])) {
         $message = AddTask($_SESSION["ID"], $NomT, $DescT, $res, $prio, $Mission_id);
-        $style = "success"; 
+        $style = "success";
     }
 }
 ?>
@@ -43,7 +43,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
-        .table th, .table td {
+        .table th,
+        .table td {
             vertical-align: middle;
             text-align: center;
         }
@@ -60,7 +61,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             border-radius: 20px;
         }
 
-        .btn-edit:hover, .btn-delete:hover {
+        .btn-edit:hover,
+        .btn-delete:hover {
             opacity: 0.9;
         }
 
@@ -74,13 +76,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <body>
     <div class="col-md-10 col-lg-8">
         <h1>Tasks</h1>
-        <button type="button" class="btn btn-warning btn-lg mt-2" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Create Task</button>
+        <button type="button" class="btn btn-warning btn-lg mt-2" data-bs-toggle="modal"
+            data-bs-target="#staticBackdrop">Create Task</button>
 
         <div class="table-container">
             <table class="table table-hover table-bordered">
                 <thead class="table-dark">
                     <tr>
-                        <th scope="col">Mission Number</th>
+                        <th scope="col"># Task Number</th>
                         <th scope="col">Nom</th>
                         <th scope="col">Description</th>
                         <th scope="col">Résultat</th>
@@ -89,15 +92,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     </tr>
                 </thead>
                 <tbody>
-                    <?php   
-                        AllTasks($_SESSION["ID"]);
+                    <?php
+                    AllTasks($_SESSION["ID"]);
                     ?>
                 </tbody>
             </table>
         </div>
 
         <!-- Modal for adding task -->
-        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -105,30 +109,54 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <?php if (!empty($message)): ?>
-                            <div class="alert alert-<?php echo $style; ?>" role="alert">
-                                <?php echo $message; ?>
-                            </div>
-                        <?php endif; ?>
+
                         <form action="" method="post">
                             <input type="hidden" name="add" value="click">
                             <div class="form-group mb-3">
-                                <input type="text" class="form-control" placeholder="Mission associée" name="Mission_id" required>
+                                <input type="text" class="form-control" placeholder="Mission associée" name="Mission_id"
+                                    required>
                             </div>
                             <div class="form-group mb-3">
                                 <input type="text" class="form-control" placeholder="Task Name" name="NomT" required>
                             </div>
                             <div class="form-group mb-3">
-                                <textarea class="form-control" placeholder="Task Description" name="DescT" rows="4" required></textarea>
+                                <textarea class="form-control" placeholder="Task Description" name="DescT" rows="4"
+                                    required></textarea>
                             </div>
                             <div class="form-group mb-3">
                                 <input type="text" class="form-control" placeholder="Résultat" name="resultat" required>
                             </div>
                             <div class="form-group mb-3">
-                                <input type="text" class="form-control" placeholder="Priorité" name="Priorite" required>
+                                <label>Priorité:</label><br>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="Priorite" value="En cours"
+                                        id="enCours" required>
+                                    <label class="form-check-label" for="enCours">
+                                        En cours
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="Priorite" value="Terminée"
+                                        id="terminee" required>
+                                    <label class="form-check-label" for="terminee">
+                                        Terminée
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="Priorite" value="Imposible"
+                                        id="imposible" required>
+                                    <label class="form-check-label" for="imposible">
+                                        Imposible
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="Priorite" value="Reporte"
+                                        id="reporte" required>
+                                    <label class="form-check-label" for="reporte">
+                                        Reporte
+                                    </label>
+                                </div>
                             </div>
-
-                            <input type="hidden" name="User_id" value="<?php echo $_SESSION['ID']; ?>"> 
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                             <button type="submit" class="btn btn-primary">Add Task</button>
                         </form>
@@ -138,7 +166,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
     </div>
 
-    <!-- Include Bootstrap JavaScript for modal functionality -->
     <script src="../bootstrap-5.3.3-dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
