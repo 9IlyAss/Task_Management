@@ -1,25 +1,30 @@
 <?php
 include("../Functions/Tasks.php");
-
+include("../Functions/Mission.php");
 $message = '';
 $style = '';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-    if (isset($_POST["NomT"])) {
         $NomT = $_POST["NomT"];
         $DescT = $_POST["DescT"];
         $Mission_id = $_POST["Mission_id"];
         $prio = $_POST["Priorite"];
         $res = $_POST["resultat"];
-    }
 
-    if (isset($_POST["add"])) {
+    if(GetMission($Mission_id) === 0) {       
+        $message = 'Mission ID invalid';
+        $style = 'danger';
+    } else if (isset($_POST["add"])) {
         $message = AddTask($_SESSION["ID"], $NomT, $DescT, $res, $prio, $Mission_id);
         $style = "success";
     }
+    if (isset($_POST["actionDelete"])) {
+        $_SESSION["success"] = DeleteTasks($_SESSION["ID"], $_POST["ID"]);
+    }
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -75,15 +80,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <body>
     <div class="col-md-10 col-lg-8">
+    
         <h1>Tasks</h1>
         <button type="button" class="btn btn-warning btn-lg mt-2" data-bs-toggle="modal"
             data-bs-target="#staticBackdrop">Create Task</button>
 
         <div class="table-container">
             <table class="table table-hover table-bordered">
+                    <?php if (!empty($message)): ?>
+                        <div class="alert alert-<?php echo $style; ?>" role="alert">
+                            <?php echo $message; ?>
+                        </div>
+                    <?php endif; ?>
                 <thead class="table-dark">
                     <tr>
-                        <th scope="col"># Task Number</th>
+                        <th scope="col"># Task ID</th>
                         <th scope="col">Nom</th>
                         <th scope="col">Description</th>
                         <th scope="col">Résultat</th>
@@ -126,6 +137,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             <div class="form-group mb-3">
                                 <input type="text" class="form-control" placeholder="Résultat" name="resultat" required>
                             </div>
+
                             <div class="form-group mb-3">
                                 <label>Priorité:</label><br>
                                 <div class="form-check">
@@ -157,8 +169,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                     </label>
                                 </div>
                             </div>
+
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                             <button type="submit" class="btn btn-primary">Add Task</button>
+
                         </form>
                     </div>
                 </div>

@@ -1,4 +1,6 @@
+<?php
 
+?>
 
 
 
@@ -74,99 +76,116 @@
 </style>
 
 <body>
-                <h3>Welcome <?php echo $_SESSION["Name"]; ?> </h3>
-                <!--*******************************************************************************************************
+    <header class="bg-black text-white text-center py-4 mb-4">
+        <h1>Welcome <?php echo $_SESSION["Name"]; ?> </h1>
+    </header>
+    <!--*******************************************************************************************************
 *************************************************************************************************************-->
-<?php 
-if(isset($_SESSION["success"])): ?>
+    <?php
+    if (isset($_SESSION["success"])): ?>
 
-<div class="alert alert-warning alert-dismissible fade show" role="alert">
-    <strong>Success !! </strong> <?php echo $_SESSION["success"]; ?>
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-</div> 
-<?php unset($_SESSION["success"]); ?>
-<?php endif; ?>
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <strong>Success !! </strong> <?php echo $_SESSION["success"]; ?>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <?php unset($_SESSION["success"]); ?>
+    <?php endif; ?>
 
-<?php if(isset($_SESSION["failed"])): ?>
-<div class="alert alert-danger alert-dismissible fade show" role="alert">
-    <strong>Failed !! </strong> <?php echo $_SESSION["failed"]; ?>
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-</div> 
-<?php unset($_SESSION["failed"]); ?>
-<?php endif; ?>
+    <?php if (isset($_SESSION["failed"])): ?>
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>Failed !! </strong> <?php echo $_SESSION["failed"]; ?>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <?php unset($_SESSION["failed"]); ?>
+    <?php endif; ?>
 
 
 
-<div class="stats">
-                    <div class="row justify-content-center">
-                        <div class="col-auto">
-                            <div class="card text-center">
-                                <div class="card-body bg-danger">
-                                    <h5 class="card-title pt-3">125</h5>
-                                </div>
-                                <div class="card-footer text-body-secondary" style="background-color: #f74663 ;">
-                                    Tasks
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-auto">
-                            <div class="card text-center">
-                                <div class="card-body bg-warning">
-                                    <h5 class="card-title pt-3">125</h5>
-                                </div>
-                                <div class="card-footer text-body-secondary" style="background-color: #ffca2c ;">
-                                    Mission
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-auto">
-                            <div class="card text-center ">
-                                <div class="card-body bg-success">
-                                    <h5 class="card-title pt-3">125</h5>
-                                </div>
-                                <div class="card-footer text-body-secondary" style="background-color: #4caf50  ;">
-                                    Shared Tasks
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-auto">
-                            <div class="card text-center Share">
-                                <div class="card-body">
-                                    <i class="fa-solid fa-paper-plane paper pt-3"></i>
-                                    <p class="card-text pt-2 text">Share a Task</p>
-                                </div>
-                            </div>
-                        </div>
+    <div class="stats">
+        <div class="row justify-content-center">
+            <div class="col-auto">
+                <div class="card text-center">
+                    <div class="card-body bg-danger">
+                        <h5 class="card-title pt-3"><?php   ?></h5>
+                    </div>
+                    <div class="card-footer text-body-secondary" style="background-color: #f74663 ;">
+                        Tasks
                     </div>
                 </div>
-
-                <!--*******************************************************************************************************
-*************************************************************************************************************-->
-                <div class="container mt-3">
-                    <div class="row">
-
-
-                        <div class="col-8 p-3 rounded">
-<!-------------------Last 4----->
-                            <h4 class="text-white bg-primary p-2 rounded">Last Tasks</h4>
-                                    <?php #include("../Functions/Last4.php"); ?>
-                        </div> 
-
-
-
-                        <div class="col-4 p-3 rounded">
-<!-------------------Suggested Accounts-->                           
-                            <h5 class="text-white bg-primary p-2 rounded">Suggested Accounts</h5>
-                                    <?php #include("../Functions/SuggestedAcc.php"); ?>
-
-                            <h5 class="text-white bg-primary p-2 rounded">Missions</h5>
-                                    <?php #include("../Functions/Last4.php"); ?>
-                        </div>
+            </div>
+            <div class="col-auto">
+                <div class="card text-center">
+                    <div class="card-body bg-warning">
+                        <h5 class="card-title pt-3"><?php  NbrMission($_SESSION["ID"]);   ?></h5>
                     </div>
-
-
+                    <div class="card-footer text-body-secondary" style="background-color: #ffca2c ;">
+                        Mission
+                    </div>
                 </div>
-                <script src="bootstrap-5.3.3-dist/js/bootstrap.min.js"></script>
+            </div>
+            <div class="col-auto">
+                <div class="card text-center ">
+                    <div class="card-body bg-success">
+                        <h5 class="card-title pt-3"><?php  NbrSharedMission($_SESSION["ID"]) ?></h5>
+                    </div>
+                    <div class="card-footer text-body-secondary" style="background-color: #4caf50  ;">
+                        Shared Tasks
+                    </div>
+                </div>
+            </div>
+            <div class="col-auto">
+                <div class="card text-center Share">
+                    <div class="card-body">
+                        <i class="fa-solid fa-paper-plane paper pt-3"></i>
+                        <p class="card-text pt-2 text">Share a Task</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--*******************************************************************************************************
+*************************************************************************************************************-->
+<div class="container mt-3">
+    <div class="row">
+        <div class="col-6 p-3 rounded">
+            <!-------------------Last 4-----> 
+            <h4 class="text-white bg-primary p-2 rounded">Last Tasks</h4>
+            <div class="table-container">
+                <table class="table table-hover table-bordered">
+                    <thead class="table-dark">
+                        <tr>
+                            <th scope="col" class="bg-primary ">Nom</th>
+                            <th scope="col" class="bg-primary ">Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php Last4Mission($_SESSION["ID"]) ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="col-6 p-3 rounded"> <!-- This column will hold the Shared Tasks -->
+            <!-------------------Suggested Accounts-->
+            <h4 class="text-white bg-primary p-2 rounded">Missions</h4>
+            <table class="table table-hover table-bordered">
+                <thead class="table-dark">
+                    <tr>
+                        <th scope="col" class="bg-primary ">User</th>
+                        <th scope="col" class="bg-primary ">Mission</th>
+                        <th scope="col" class="bg-primary ">Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php Last4Shared($_SESSION["ID"]); ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+        <script src="bootstrap-5.3.3-dist/js/bootstrap.min.js"></script>
 
 </body>
 

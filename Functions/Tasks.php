@@ -35,7 +35,7 @@ function AddTask($userID, $NomT, $DescT, $resultat, $Priorite, $MissionId)
 
     $sql = "INSERT INTO tasks (Nom, `Desc`, resultat, Priorite, User_id, Mission_id) VALUES (?, ?, ?, ?, ?, ?);";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("sssiii", $NomT, $DescT, $resultat, $Priorite, $userID, $MissionId);
+    $stmt->bind_param("ssssii", $NomT, $DescT, $resultat, $Priorite, $userID, $MissionId);
     if ($stmt->execute()) {
         return "Task Created successfully";
     }
@@ -47,7 +47,7 @@ function UpdateTasks($userID, $TaskID, $NomT, $DescT, $resultat, $Priorite)
 
     $sql = "UPDATE tasks SET Nom = ?, `Desc` = ?, resultat = ?, Priorite = ? WHERE User_id = ? AND id = ?;";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("sssiii", $NomT, $DescT, $resultat, $Priorite, $userID, $TaskID);
+    $stmt->bind_param("ssssii", $NomT, $DescT, $resultat, $Priorite, $userID, $TaskID);
 
     if ($stmt->execute()) {
         return "Task Updated successfully";

@@ -1,5 +1,9 @@
 <?php
-    session_start();
+session_start();
+include("../Functions/Mission.php");
+include("../Functions/Share.php");
+
+
 ?>
 
 <!DOCTYPE html>
@@ -49,25 +53,19 @@
 </head>
 
 <body>
-<div class="container-fluid h-100">
+    <div class="container-fluid h-100">
         <div class="row h-100">
             <div class="col-md-2 sidebar">
-                
-            
+
+
                 <h4 class="mb-5 mt-1">Task Manager</h3>
                     <a href="?Page=Home" class="d-flex align-items-center p-2">
                         <i class="fas fa-home me-3 icon"></i> Home
                     </a>
-                    <a href="?Page=Taskes" class="d-flex align-items-center p-2">
-                        <i class="fas fa-tasks me-3 icon"></i> Tasks
-                    </a>
                     <a href="?Page=Mission" class="d-flex align-items-center p-2">
                         <i class="fas fa-file-alt me-3 icon"></i> Mission
                     </a>
-                    <a href="?Page=Statistics" class="d-flex align-items-center p-2">
-                        <i class="fas fa-chart-bar me-3 icon"></i> Review & Statistics
-                    </a>
-                    <a href="?Page=shared" class="d-flex align-items-center p-2">
+                    <a href="?Page=SharedMission" class="d-flex align-items-center p-2">
                         <i class="fas fa-share-alt me-3 icon"></i> Shared Tasks
                     </a>
 
@@ -78,22 +76,20 @@
                         <i class="fas fa-user me-3 icon"></i> Account
                     </a>
                     <div class="down">
-                        <a href="#" class="btn btn-primary mt-2 w-100 ">Create a Task</a>
-                        <a href="#" class="btn btn-secondary mt-2 w-100">Logout</a>
+                        <a href="?Page=CreatMission" class="btn btn-primary mt-2 w-100 ">Create a Mission</a>
+                        <a href="../Login/Logout.php" class="btn btn-secondary mt-2 w-100">Logout</a>
                     </div>
-                    </div>
-                    <div class="col-md-10 main-content mt-4">
+            </div>
 
-                            <?php 
-                                $page = isset($_GET['Page']) ? $_GET['Page'] : 'Home';
-                                $page = preg_replace('/[^a-zA-Z0-9]/', '', $page);
-                                $page = "../Pages/{$page}.php";
-                                    include($page);
-                            ?>
-                    </div>
-
-
-
+            <div class="col-md-10 main-content mt-4">
+                
+                <?php
+                $page = isset($_GET['Page']) ? $_GET['Page'] : 'Home';
+                $page = preg_replace('/[^a-zA-Z0-9]/', '', $page);
+                $page = "../Pages/{$page}.php";
+                include($page);
+                ?>
+            </div>
 
 
 
@@ -101,7 +97,10 @@
 
 
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
+
+
+
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
 </body>
 
 </html>

@@ -61,9 +61,14 @@ $sql = "CREATE TABLE IF NOT EXISTS Operations (
 );";
 $conn->query($sql);
 
+$sql = "CREATE TABLE IF NOT EXISTS token (
+    nbr varchar(100)
+);";
+$conn->query($sql);
 
 $result = $conn->query("SELECT COUNT(*) AS Count FROM USERS");
 $row = $result->fetch_assoc();
+
 
 if ($row['Count'] == 0) 
 {
@@ -79,4 +84,34 @@ if ($row['Count'] == 0)
     $stmt->execute();
     $stmt->close();
 }
+
+
+
+// function CreateToken()
+// {
+//     return bin2hex(random_bytes(32));
+// }
+
+// function InsertToken($token)
+// {
+//     include("../dbconn.php");
+//     $sql="INSERT INTO token
+//     values(?);";
+//     $sql=$conn->prepare($sql);
+//     $sql->execute(["nbr"=>$token]);
+// }
+// function CheckTocken($token)
+// {
+//     include("../dbconn.php");
+//     $sql="SELECT * FROM token;";
+//     $sql=$conn->prepare($sql);
+//     $sql->execute();
+//     $result=$sql->get_result();
+//     if ($result->num_rows > 0) 
+//     {   $row = $result->fetch_assoc();
+//         if($row["nbr"]===$token)
+//           return true;
+//     }    
+// }
+
 ?>

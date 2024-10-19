@@ -7,7 +7,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $Email=$_POST["Email"];
     $Password=$_POST["Password"];
     
-    $sql="SELECT Nom,Email,Password,id,Etat FROM USERS WHERE Email= ? ;";
+    $sql="SELECT Nom,Email,Password,id,Etat,Droit FROM USERS WHERE Email= ? ;";
     $stmt=$conn->prepare($sql);
     $stmt->bind_param("s",$Email);
     $stmt->execute();
@@ -18,7 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     else
         {
-            $stmt->bind_result($dbName, $dbEmail, $dbPassword,$dbUserID,$Etat);
+            $stmt->bind_result($dbName, $dbEmail, $dbPassword,$dbUserID,$Etat,$Role);
             $stmt->fetch();
             if($Password != $dbPassword)
                 {
@@ -27,21 +27,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 }
             else
                 {
-                    // $operation="";
-                    // $sql = "INSERT INTO Operations (user_id,operation,Dateheur) 
-                    //         VALUES (?, ?, ?);";
-                    // $stmt = $conn->prepare($sql);
-                    // $stmt->bind_param("iss",$dbUserID,$operation,$currentdate);
-                    // $stmt->execute();
-                    // $message = "You have successfully signed up! <a href='Login.php' class='alert-link'>Click here to log in</a>";
-                    // $style = "warning";
-                    // if($Etat==="desactive")
-                    //     $message="The Account is not Activated yet !";
-                    // else
-                    {
+                    if($Etat==="desactive")
+                        $message="Your Account isn't Active Yet !";     
+                    else{
                         $_SESSION["Email"] = $dbEmail;
                         $_SESSION["Name"] = $dbName;
                         $_SESSION["ID"]=$dbUserID;
+                        $_SESSION["Role"] = $Role;
                         
                         if($dbEmail==="Admin@gmail.com")
                             header("Location: ../Dashboard/AdminDashboard.php");
