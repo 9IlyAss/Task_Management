@@ -106,7 +106,7 @@
             <div class="col-auto">
                 <div class="card text-center">
                     <div class="card-body bg-danger">
-                        <h5 class="card-title pt-3"><?php   ?></h5>
+                        <h5 class="card-title pt-3"><?php  echo CountTask($_SESSION["ID"]);  ?></h5>
                     </div>
                     <div class="card-footer text-body-secondary" style="background-color: #f74663 ;">
                         Tasks
@@ -133,14 +133,15 @@
                     </div>
                 </div>
             </div>
-            <div class="col-auto">
+            <a href="?Page=Taskes" class="col-auto"><div >
                 <div class="card text-center Share">
                     <div class="card-body">
+
                         <i class="fa-solid fa-paper-plane paper pt-3"></i>
                         <p class="card-text pt-2 text">Share a Task</p>
                     </div>
                 </div>
-            </div>
+            </div></a>
         </div>
     </div>
 

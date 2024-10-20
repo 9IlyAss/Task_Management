@@ -117,7 +117,20 @@ function DisplayTasks($missionID) {
         echo "<tr><td colspan='6'>No tasks found for this mission.</td></tr>";
     }
 }
+function CountTask($UserID) {
 
+    include("../dbconn.php");
+    $sql = "SELECT COUNT(*) as total FROM tasks WHERE User_id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $UserID);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    if ($row = $result->fetch_assoc()) {
+        return $row['total'];
+    } else {
+        return 0; 
+    }
+}
 function CountTasks($missionID) {
     include("../dbconn.php");
     $sql = "SELECT COUNT(*) as total FROM tasks WHERE Mission_id = ?";

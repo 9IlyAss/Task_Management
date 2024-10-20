@@ -1,5 +1,13 @@
 <?php
-session_start();
+session_start([
+    'cookie_lifetime' => 0,          // Session cookie expires when the browser is closed
+    'cookie_httponly' => true,       // Prevent JavaScript from accessing the session cookie
+    'cookie_secure' => true,         // Ensure session cookies are only sent over HTTPS
+    'use_strict_mode' => true,       // Reject uninitialized session IDs
+    'use_only_cookies' => true,      // Prevent using session IDs in the URL
+    'sid_length' => 64,              // Increase session ID length for more security
+    'sid_bits_per_character' => 6,   // Increase session ID randomness
+]);
 include("../dbconn.php");
 include("../Functions/Log.php");
 
@@ -27,13 +35,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $message = "The Email Already Exists!";
             $style = "danger";
         } else {
+
+            $hashedPassword = password_hash($Password, PASSWORD_BCRYPT);
             $sql = "INSERT INTO USERS (Nom,Email,Password,Etat,Droit) VALUES (?,?,?,?,?);";
             $stmt = $conn->prepare($sql);
-            $stmt->bind_param("sssss", $Name, $email,$Password,$Etat,$Droit);
+            $stmt->bind_param("sssss", $Name, $email,$hashedPassword,$Etat,$Droit);
             $stmt->execute();
             $message = "You have successfully signed up! <a href='Login.php' class='alert-link'>Click here to log in</a>";
             $style = "warning";
-
 
         }
         $stmt->close();

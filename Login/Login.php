@@ -1,5 +1,14 @@
 <?php
-session_start();
+session_start([
+    'cookie_lifetime' => 0,          // Session cookie expires when the browser is closed
+    'cookie_httponly' => true,       // Prevent JavaScript from accessing the session cookie
+    'cookie_secure' => true,         // Ensure session cookies are only sent over HTTPS
+    'use_strict_mode' => true,       // Reject uninitialized session IDs
+    'use_only_cookies' => true,      // Prevent using session IDs in the URL
+    'sid_length' => 64,              // Increase session ID length for more security
+    'sid_bits_per_character' => 6,   // Increase session ID randomness
+]);
+
 include("../dbconn.php");
 include("../Functions/Log.php");
 
@@ -21,10 +30,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         {
             $stmt->bind_result($dbName, $dbEmail, $dbPassword,$dbUserID,$Etat,$Role);
             $stmt->fetch();
-            if($Password != $dbPassword)
+            if(password_verify($Password,$dbPassword))
                 {
                     $message="The Password is Incorrect !";
-                    
                 }
             else
                 {
