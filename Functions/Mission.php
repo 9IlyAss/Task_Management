@@ -50,6 +50,10 @@ function AddMission($userID, $NomM, $DescM) {
     $sql = "INSERT INTO Missions (Nom, `Desc`, User_id) VALUES (?, ?, ?);";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("ssi", $NomM, $DescM, $userID);
+
+    $op="added a new mission.";
+    AddLog($_SESSION["ID"],$op);
+
     if ($stmt->execute()) {
         return "Mission added successfully!";
     } else {
@@ -59,10 +63,15 @@ function AddMission($userID, $NomM, $DescM) {
 
 function UpdateMission($userID, $NomMU, $DescMU, $missionID) {
     include("../dbconn.php");
+    include("../Functions/Log.php");
 
     $sql = "UPDATE Missions SET Nom=?, `Desc`=? WHERE id=? AND User_id=?;";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("ssii", $NomMU, $DescMU, $missionID, $userID);
+
+    $op="updated a mission.";
+    AddLog($_SESSION["ID"],$op);
+    
     if ($stmt->execute()) {
         return "Mission updated successfully!";
     } else {
@@ -74,11 +83,16 @@ function UpdateMission($userID, $NomMU, $DescMU, $missionID) {
 function DeleteMission($userID, $missionID) {
 
     include("../dbconn.php");
+    include("../Functions/Log.php");
 
     DeleteSharedMission($missionID);
     $sql = "DELETE FROM Missions WHERE id=? AND User_id=?;";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("ii", $missionID, $userID);
+
+    $op="deleted a mission.";
+    AddLog($_SESSION["ID"],$op);
+    
     if ($stmt->execute()) {
         return "Mission deleted successfully!";
     } else {
@@ -110,16 +124,12 @@ function Last4Mission($userID)
 function NbrMission($userID) {
     include("../dbconn.php");
 
-    // Use a prepared statement for security
     $sql = "SELECT COUNT(*) as total FROM Missions WHERE User_id = ?;";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("i", $userID);
     $stmt->execute();
+        $result = $stmt->get_result();
     
-    // Fetch the result
-    $result = $stmt->get_result();
-    
-    // Get the total count from the result
     if ($row = $result->fetch_assoc()) {
         echo $row['total']; // Output the total number of missions
     } else {
@@ -143,11 +153,16 @@ function AllMissionRows($userID) {
 
 function Associate($mission_id, $task_id, $user_id) {
     include("../dbconn.php");
+    include("../Functions/Log.php");
 
     $sql = "UPDATE tasks SET mission_id = ? WHERE id = ? AND user_id = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("iii", $mission_id, $task_id, $user_id);
     $stmt->execute();
+
+    $op="associated mission with task";
+    AddLog($_SESSION["ID"],$op);
+    
     $stmt->close();
 }
 ?>

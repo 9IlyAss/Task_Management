@@ -3,6 +3,7 @@ session_start();
 include("../Functions/Mission.php");
 include("../Functions/Share.php");
 include("../Functions/Tasks.php");
+include("../Functions/Log.php");
 
 ?>
 

@@ -42,23 +42,34 @@ function AllSharedMission() {
 }
 function ShareMission($userID, $missionID,$Role) {
     include("../dbconn.php");
+    include("../Functions/Log.php");
 
     $sql = "INSERT INTO Shared_Mission 
             VALUES (?,?,?);";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("iis",$missionID,$userID,$Role);
+
+    $op="Shared a new mission.";
+    AddLog($_SESSION["ID"],$op);
+    
     if ($stmt->execute()) {
         return "Mission Shared successfully!";
     } else {
         return "Error Sharing mission: " . $stmt->error;
     }
 }
+
 function DeleteSharedMission($missionID) {
     include("../dbconn.php");
+    include("../Functions/Log.php");
 
     $sql = "DELETE FROM Shared_Mission WHERE mission_id=? ;";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("i", $missionID);
+
+    $op="Delete a Shared mission.";
+    AddLog($_SESSION["ID"],$op);
+    
     if ($stmt->execute()) {
         return "Mission deleted successfully!";
     } else {
@@ -153,4 +164,22 @@ function AllSharedTasks() {
     }
 }
 
+function ShareTask($userID, $TaskID,$Role) {
+    include("../dbconn.php");
+    include("../Functions/Log.php");
+
+    $sql = "INSERT INTO Shared_Task 
+            VALUES (?,?,?);";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("iis",$TaskID,$userID,$Role);
+
+    $op="Shared a Task.";
+    AddLog($_SESSION["ID"],$op);
+    
+    if ($stmt->execute()) {
+        return "task Shared successfully!";
+    } else {
+        return "Error Sharing task: " . $stmt->error;
+    }
+}
 ?>

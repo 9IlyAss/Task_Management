@@ -48,8 +48,8 @@ $sql = "CREATE TABLE IF NOT EXISTS Shared_Mission (
     mission_id int,
     user_partage_id int,
     Droit Enum('admin', 'user'),
-    FOREIGN KEY (mission_id) REFERENCES Missions(id),
-    FOREIGN KEY (user_partage_id) REFERENCES USERS(id)
+    FOREIGN KEY (mission_id) REFERENCES Missions(id)  ON DELETE CASCADE,
+    FOREIGN KEY (user_partage_id) REFERENCES USERS(id)  ON DELETE CASCADE
 );";
 $conn->query($sql);
 
@@ -57,15 +57,15 @@ $sql = "CREATE TABLE IF NOT EXISTS Shared_Task (
     Task_id int,
     user_partage_id int,
     Droit Enum('admin', 'user'),
-    FOREIGN KEY (Task_id) REFERENCES tasks(id),
-    FOREIGN KEY (user_partage_id) REFERENCES USERS(id)
+    FOREIGN KEY (Task_id) REFERENCES tasks(id)  ON DELETE CASCADE,
+    FOREIGN KEY (user_partage_id) REFERENCES USERS(id)  ON DELETE CASCADE
 );";
 $conn->query($sql);
 
 $sql = "CREATE TABLE IF NOT EXISTS Operations (
     user_id int,
     operation varchar(255),
-    Dateheur date,
+    Dateheur DATETIME  DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES USERS(id)
 );";
 $conn->query($sql);

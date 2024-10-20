@@ -1,6 +1,7 @@
 <?php
 session_start();
 include("../dbconn.php");
+include("../Functions/Log.php");
 
 $message = '';
 $style = '';
@@ -32,6 +33,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $stmt->execute();
             $message = "You have successfully signed up! <a href='Login.php' class='alert-link'>Click here to log in</a>";
             $style = "warning";
+
+
         }
         $stmt->close();
     }

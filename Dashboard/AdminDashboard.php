@@ -1,7 +1,9 @@
 <?php
 session_start();
+include("../Functions/Log.php");
 
     include("../Functions/Account.php");
+
 
 ?>
 
@@ -60,8 +62,8 @@ session_start();
                     <a href="?Page=Home" class="d-flex align-items-center p-2">
                         <i class="fas fa-home me-3 icon"></i> Home
                     </a>
-                    <a href="?Page=Mission" class="d-flex align-items-center p-2">
-                        <i class="fas fa-tasks me-3 icon"></i> Missions
+                    <a href="?Page=Log" class="d-flex align-items-center p-2">
+                        <i class="fas fa-tasks me-3 icon"></i> Log
                     </a>
                     <a href="?Page=Accounts" class="d-flex align-items-center p-2">
                         <i class="fas fa-file-alt me-3 icon"></i> Accounts

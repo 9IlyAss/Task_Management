@@ -1,6 +1,7 @@
 <?php
 session_start();
 include("../dbconn.php");
+include("../Functions/Log.php");
 
 $message="";
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -30,10 +31,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     if($Etat==="desactive")
                         $message="Your Account isn't Active Yet !";     
                     else{
+                        
                         $_SESSION["Email"] = $dbEmail;
                         $_SESSION["Name"] = $dbName;
                         $_SESSION["ID"]=$dbUserID;
                         $_SESSION["Role"] = $Role;
+
+                        $op="has logged into the system";
+                        AddLog($dbUserID,$op);
                         
                         if($dbEmail==="Admin@gmail.com")
                             header("Location: ../Dashboard/AdminDashboard.php");

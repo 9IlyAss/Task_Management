@@ -13,6 +13,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST["actionDelete"])) {
         $_SESSION["success"] = DeleteTasks($_SESSION["ID"], $_POST["ID"]);
     }
+
+    if (isset($_POST["actionShare"])) {
+        $message = ShareTask($_SESSION["ID"], $_POST["ID"], $_SESSION["Role"]);
+        $style = 'info';
+    }
 }
 ?>
 
@@ -137,7 +142,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <textarea class="form-control" placeholder="Task Description" name="DescT" rows="3" required></textarea>
             </div>
 
-            <!-- Priorité in two columns -->
             <div class="form-group mb-3">
                 <label>Priorité:</label>
                 <div class="row">
@@ -186,7 +190,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <th scope="col">Description</th>
                     <th scope="col">Résultat</th>
                     <th scope="col">Priorité</th>
-                    <th scope="col" colspan="2">Actions</th>
+                    <th scope="col" colspan="3">Actions</th>
                 </tr>
             </thead>
             <tbody>

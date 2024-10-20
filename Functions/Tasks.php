@@ -23,6 +23,7 @@ function AllTasks($userID)
                         <input type='hidden' name='ID' value='{$row['id']}'>
                         <td><button type='submit' class='btn btn-danger' name='actionDelete' value='delete'>Delete</button></td>
                         <td><button type='button' class='btn btn-warning' name='actionUpdate' value='update'>Update</button></td>
+                        <td><button type=\"submit\" class=\"btn btn-primary\" name=\"actionShare\" value=\"Share\">Share</button></td>
                     </form>
                 </tr>";
         }
@@ -31,11 +32,17 @@ function AllTasks($userID)
 
 function AddTask($userID, $NomT, $DescT, $resultat, $Priorite)
 {
+    include("../Functions/Log.php");
     include("../dbconn.php");
+    
     $MissionID=null;
     $sql = "INSERT INTO tasks (Nom, `Desc`, resultat, Priorite, User_id, Mission_id) VALUES (?, ?, ?, ?, ?, ?);";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("ssssis", $NomT, $DescT, $resultat, $Priorite, $userID,$MissionID);
+
+    $op="added a new Task.";
+    AddLog($_SESSION["ID"],$op);
+    
     if ($stmt->execute()) {
         return "Task Created successfully";
     }
@@ -49,6 +56,9 @@ function UpdateTasks($userID, $TaskID, $NomT, $DescT, $resultat, $Priorite)
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("ssssii", $NomT, $DescT, $resultat, $Priorite, $userID, $TaskID);
 
+    $op="update a Task.";
+    AddLog($_SESSION["ID"],$op);
+    
     if ($stmt->execute()) {
         return "Task Updated successfully";
     }
@@ -57,11 +67,15 @@ function UpdateTasks($userID, $TaskID, $NomT, $DescT, $resultat, $Priorite)
 function DeleteTasks($userID, $TaskID)
 {
     include("../dbconn.php");
+    include("../Functions/Log.php");
 
     $sql = "DELETE FROM tasks WHERE User_id = ? AND id = ?;";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("ii", $userID, $TaskID);
 
+    $op="Delete a  Task.";
+    AddLog($_SESSION["ID"],$op);
+    
     if ($stmt->execute()) {
         return "Task Deleted successfully";
     } 
