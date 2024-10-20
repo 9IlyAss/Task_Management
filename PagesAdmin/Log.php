@@ -43,6 +43,7 @@
                 <thead class="table-dark">
                     <tr>
                         <th scope="col"># ID USER</th>
+                        <th scope="col">User Name</th>
                         <th scope="col">Type</th>
                         <th scope="col">Date </th>
                     </tr>

@@ -14,10 +14,10 @@ function AllMission($userID) {
                     <td>' .$row["id"] .'</td>
                     <td>' . $row["Nom"] . '</td>
                     <td>' . $row["Desc"] . '</td>
-                    <td>' . $result->num_rows . '</td>
+                    <td>' . CountTasks($row["id"])  . '</td>
                     <form action="" method="POST">
                         <input type="hidden" name="ID" value="' . $row["id"] . '">
-                        <td><button type="submit" class="btn btn-success" name="actionTasks" value="Tasks">Tasks</button></td>
+                        <td><button type="submit" class="btn btn-success" name="actionShowTasks">Tasks</button></td>
                         <td><button type="submit" class="btn btn-danger"  name="actionDelete" value="delete">Delete</button></td>
                         <td><button type="button" class="btn btn-warning" name="actionUpdate" value="Update">Update</button></td>
                         <td><button type="submit" class="btn btn-primary" name="actionShare" value="Share">Share</button></td>

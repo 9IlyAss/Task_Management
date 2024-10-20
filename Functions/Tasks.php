@@ -93,4 +93,43 @@ function AllTaskRows($userID) {
         echo '<option value="' . htmlspecialchars($tasks['id']) . '">' . htmlspecialchars($tasks['Nom']) . '</option>';
     }
 }
+
+function DisplayTasks($missionID) {
+    include("../dbconn.php");
+
+    $sql = "SELECT id, Nom, `Desc`, resultat, Priorite FROM tasks WHERE Mission_id = ?;";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $missionID);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result && $result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            echo '<tr>
+                    <td>' . $row["id"] . '</td>
+                    <td>' . $row["Nom"] . '</td>
+                    <td>' . $row["Desc"] . '</td>
+                    <td>' . $row["resultat"] . '</td>
+                    <td>' . $row["Priorite"] . '</td>
+                </tr>';
+        }
+    } else {
+        echo "<tr><td colspan='6'>No tasks found for this mission.</td></tr>";
+    }
+}
+
+function CountTasks($missionID) {
+    include("../dbconn.php");
+    $sql = "SELECT COUNT(*) as total FROM tasks WHERE Mission_id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $missionID);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    if ($row = $result->fetch_assoc()) {
+        return $row['total'];
+    } else {
+        return 0; 
+    }
+}
+
 ?>

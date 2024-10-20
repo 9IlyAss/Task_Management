@@ -63,10 +63,10 @@ include("../Functions/Log.php");
                         <i class="fas fa-home me-3 icon"></i> Home
                     </a>
                     <a href="?Page=Log" class="d-flex align-items-center p-2">
-                        <i class="fas fa-tasks me-3 icon"></i> Log
+                    <i class="fa-brands fa-font-awesome me-3 icon"></i> Log
                     </a>
                     <a href="?Page=Accounts" class="d-flex align-items-center p-2">
-                        <i class="fas fa-file-alt me-3 icon"></i> Accounts
+                    <i class="fa-regular fa-circle-user me-3 icon"></i> Accounts Management
                     </a>
                     <div class="mt-4 mb-3">OTHER</div>
 

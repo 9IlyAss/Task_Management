@@ -11,27 +11,32 @@ function AddLog($userID,$op) {
 }}
 
 if (!function_exists('ViewLog')) {
+    function ViewLog() { 
+        include("../dbconn.php");
 
-function ViewLog() { 
-    include("../dbconn.php");
-    
-    $sql = "SELECT * FROM Operations 
-            ORDER BY Dateheur DESC;";
-    $stmt = $conn->prepare($sql);
-    $stmt->execute();
-    $result = $stmt->get_result(); 
-    if ($result && $result->num_rows > 0) {
-        while ($row = $result->fetch_assoc()) {
-            echo '<tr>
-                    <td>' . $row["user_id"] . '</td>
-                    <td>' . $row["operation"] . '</td>
-                    <td>' . $row["Dateheur"] . '</td>
-                </tr>';
+        $sql = "SELECT o.user_id, u.Nom, o.operation, o.Dateheur 
+                FROM Operations o
+                JOIN USERS u ON o.user_id = u.id
+                ORDER BY o.Dateheur DESC;";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->get_result(); 
+        
+        if ($result && $result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                echo '<tr>
+                        <td>' . $row["user_id"] . '</td>
+                        <td>' . $row["Nom"] . '</td>  <!-- Displaying user name -->
+                        <td>' . $row["operation"] . '</td>
+                        <td>' . $row["Dateheur"] . '</td>
+                    </tr>';
+            }
+        } else {
+            echo "<tr><td colspan='4'>No operations found.</td></tr>"; // Updated colspan to match the number of columns
         }
-    } else {
-        echo "<tr><td colspan='7'>No operations found.</td></tr>";
     }
-}}
+}
+
 
 
 /*$sql = "CREATE TABLE IF NOT EXISTS Operations (

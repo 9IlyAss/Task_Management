@@ -67,10 +67,10 @@ include("../Functions/Log.php");
                         <i class="fas fa-file-alt me-3 icon"></i> Mission
                     </a>
                     <a href="?Page=Taskes" class="d-flex align-items-center p-2">
-                        <i class="fas fa-share-alt me-3 icon"></i>Tasks
+                    <i class="fa-solid fa-list-check me-3 icon"></i>Tasks
                     </a>
                     <a href="?Page=LinkTask" class="d-flex align-items-center p-2">
-                        <i class="fas fa-share-alt me-3 icon"></i> Link Tasks
+                    <i class="fa-solid fa-link me-3 icon"></i> Link Tasks
                     </a>
                     <a href="?Page=SharedMission" class="d-flex align-items-center p-2">
                         <i class="fas fa-share-alt me-3 icon"></i> Shared Mission
