@@ -53,6 +53,15 @@ $sql = "CREATE TABLE IF NOT EXISTS Shared_Mission (
 );";
 $conn->query($sql);
 
+$sql = "CREATE TABLE IF NOT EXISTS Shared_Task (
+    Task_id int,
+    user_partage_id int,
+    Droit Enum('admin', 'user'),
+    FOREIGN KEY (Task_id) REFERENCES tasks(id),
+    FOREIGN KEY (user_partage_id) REFERENCES USERS(id)
+);";
+$conn->query($sql);
+
 $sql = "CREATE TABLE IF NOT EXISTS Operations (
     user_id int,
     operation varchar(255),

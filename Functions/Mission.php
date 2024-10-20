@@ -127,4 +127,27 @@ function NbrMission($userID) {
     }
 }
 
+function AllMissionRows($userID) {
+    include("../dbconn.php");
+    
+    $sql = "SELECT * FROM Missions WHERE User_id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $userID);
+    $stmt->execute();
+    $missionsResult = $stmt->get_result();
+
+    while ($mission = $missionsResult->fetch_assoc()) {
+        echo '<option value="' . htmlspecialchars($mission['id']) . '">' . htmlspecialchars($mission['Nom']) . '</option>';
+    }
+}
+
+function Associate($mission_id, $task_id, $user_id) {
+    include("../dbconn.php");
+
+    $sql = "UPDATE tasks SET mission_id = ? WHERE id = ? AND user_id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("iii", $mission_id, $task_id, $user_id);
+    $stmt->execute();
+    $stmt->close();
+}
 ?>

@@ -22,20 +22,20 @@ function AllTasks($userID)
                     <form method='POST'>
                         <input type='hidden' name='ID' value='{$row['id']}'>
                         <td><button type='submit' class='btn btn-danger' name='actionDelete' value='delete'>Delete</button></td>
-                        <td><button type='button' class='btn btn-warning' onclick=\"window.location.href='../Pages/update.php?id={$row['id']}&Nom=" . urlencode($row['Nom']) . "&Des=" . urlencode($row['Desc']) . "'\">Update</button></td>
+                        <td><button type='button' class='btn btn-warning' name='actionUpdate' value='update'>Update</button></td>
                     </form>
                 </tr>";
         }
     }
 }
 
-function AddTask($userID, $NomT, $DescT, $resultat, $Priorite, $MissionId)
+function AddTask($userID, $NomT, $DescT, $resultat, $Priorite)
 {
     include("../dbconn.php");
-
+    $MissionID=null;
     $sql = "INSERT INTO tasks (Nom, `Desc`, resultat, Priorite, User_id, Mission_id) VALUES (?, ?, ?, ?, ?, ?);";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("ssssii", $NomT, $DescT, $resultat, $Priorite, $userID, $MissionId);
+    $stmt->bind_param("ssssis", $NomT, $DescT, $resultat, $Priorite, $userID,$MissionID);
     if ($stmt->execute()) {
         return "Task Created successfully";
     }
@@ -65,5 +65,18 @@ function DeleteTasks($userID, $TaskID)
     if ($stmt->execute()) {
         return "Task Deleted successfully";
     } 
+}
+function AllTaskRows($userID) {
+    include("../dbconn.php");
+
+    $sql = "SELECT * FROM tasks WHERE User_id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $userID); // Fixed variable name to $userID
+    $stmt->execute();
+    $tasksResult = $stmt->get_result(); // Correct variable name
+
+    while ($tasks = $tasksResult->fetch_assoc()) {
+        echo '<option value="' . htmlspecialchars($tasks['id']) . '">' . htmlspecialchars($tasks['Nom']) . '</option>';
+    }
 }
 ?>

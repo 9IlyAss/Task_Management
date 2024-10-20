@@ -2,7 +2,7 @@
 session_start();
 include("../Functions/Mission.php");
 include("../Functions/Share.php");
-
+include("../Functions/Tasks.php");
 
 ?>
 
@@ -65,8 +65,14 @@ include("../Functions/Share.php");
                     <a href="?Page=Mission" class="d-flex align-items-center p-2">
                         <i class="fas fa-file-alt me-3 icon"></i> Mission
                     </a>
+                    <a href="?Page=Taskes" class="d-flex align-items-center p-2">
+                        <i class="fas fa-share-alt me-3 icon"></i>Tasks
+                    </a>
+                    <a href="?Page=LinkTask" class="d-flex align-items-center p-2">
+                        <i class="fas fa-share-alt me-3 icon"></i> Link Tasks
+                    </a>
                     <a href="?Page=SharedMission" class="d-flex align-items-center p-2">
-                        <i class="fas fa-share-alt me-3 icon"></i> Shared Tasks
+                        <i class="fas fa-share-alt me-3 icon"></i> Shared Mission
                     </a>
 
 

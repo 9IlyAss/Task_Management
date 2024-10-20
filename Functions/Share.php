@@ -127,5 +127,30 @@ function NbrSharedMission($userID) {
         echo "0"; // If no shared missions found
     }
 }
+function AllSharedTasks() {
+    include("../dbconn.php");
+    $sql = "SELECT ut.Nom AS user_name, ut.Email AS user_email, t.Nom AS task_name, t.`Desc` AS task_desc 
+            FROM Shared_Task st
+            JOIN USERS ut ON st.user_partage_id = ut.id
+            JOIN tasks t ON st.Task_id = t.id
+            ORDER BY st.Task_id DESC;";
+    
+    $stmt = $conn->prepare($sql);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result && $result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            echo '<tr>
+                    <td>' . htmlspecialchars($row["user_name"]) . '</td>
+                    <td>' . htmlspecialchars($row["user_email"]) . '</td>
+                    <td>' . htmlspecialchars($row["task_name"]) . '</td>
+                    <td>' . htmlspecialchars($row["task_desc"]) . '</td>
+                </tr>';
+        }
+    } else {
+        echo "<tr><td colspan='4'>No tasks shared.</td></tr>"; // Adjusted colspan to match the number of columns
+    }
+}
 
 ?>
