@@ -1,8 +1,11 @@
 <?php
 session_start();
+if (!isset($_SESSION['Role']) || $_SESSION['Role'] !== 'admin') {
+    header("Location: ../Login/Login.php");
+    exit();
+}
 include("../Functions/Log.php");
-
-    include("../Functions/Account.php");
+include("../Functions/Account.php");
 
 
 ?>

@@ -1,66 +1,65 @@
 <?php
 session_start([
-    'cookie_lifetime' => 0,          // Session cookie expires when the browser is closed
-    'cookie_httponly' => true,       // Prevent JavaScript from accessing the session cookie
-    'cookie_secure' => true,         // Ensure session cookies are only sent over HTTPS
-    'use_strict_mode' => true,       // Reject uninitialized session IDs
-    'use_only_cookies' => true,      // Prevent using session IDs in the URL
-    'sid_length' => 64,              // Increase session ID length for more security
-    'sid_bits_per_character' => 6,   // Increase session ID randomness
+    'cookie_lifetime' => 0,
+    'cookie_httponly' => true,
+    'cookie_secure' => true,
+    'use_strict_mode' => true,
+    'use_only_cookies' => true,
+    'sid_length' => 64,
+    'sid_bits_per_character' => 6,
 ]);
 
 include("../dbconn.php");
 include("../Functions/Log.php");
 
-$message="";
+$message = "";
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $Email=$_POST["Email"];
-    $Password=$_POST["Password"];
+    $Email = $_POST["Email"];
+    $Password = htmlspecialchars($_POST["Password"],ENT_QUOTES, 'UTF-8');
+
+    if (!filter_var($Email, FILTER_VALIDATE_EMAIL)) {
+    die("Invalid email format.");
+    }
+
     
-    $sql="SELECT Nom,Email,Password,id,Etat,Droit FROM USERS WHERE Email= ? ;";
-    $stmt=$conn->prepare($sql);
-    $stmt->bind_param("s",$Email);
+    $sql = "SELECT Nom, Email, Password, id, Etat, Droit FROM USERS WHERE Email = ?;";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("s", $Email);
     $stmt->execute();
     $stmt->store_result();
-    if($stmt->num_rows===0)
-        {
-            $message="The Email doesn't Exist!";
-        }
-    else
-        {
-            $stmt->bind_result($dbName, $dbEmail, $dbPassword,$dbUserID,$Etat,$Role);
-            $stmt->fetch();
-            if(password_verify($Password,$dbPassword))
-                {
-                    $message="The Password is Incorrect !";
-                }
-            else
-                {
-                    if($Etat==="desactive")
-                        $message="Your Account isn't Active Yet !";     
-                    else{
-                        
-                        $_SESSION["Email"] = $dbEmail;
-                        $_SESSION["Name"] = $dbName;
-                        $_SESSION["ID"]=$dbUserID;
-                        $_SESSION["Role"] = $Role;
 
-                        $op="has logged into the system";
-                        AddLog($dbUserID,$op);
-                        
-                        if($dbEmail==="Admin@gmail.com")
-                            header("Location: ../Dashboard/AdminDashboard.php");
-                        else
-                            header("Location: ../Dashboard/CleintDashboard.php");
-                        exit();
-                    }
+    if ($stmt->num_rows === 0) {
+        $message = "Invalid email or password!";
+    } else {
+        $stmt->bind_result($dbName, $dbEmail, $dbPassword, $dbUserID, $Etat, $Role);
+        $stmt->fetch();
+
+        if ($Etat === "desactive") {
+            $message = "Your account isn't active yet!";
+        } else {
+            if (!password_verify($Password, $dbPassword)) {
+                $message = "Invalid email or password!";
+            } else {
+                $_SESSION["Email"] = $dbEmail;
+                $_SESSION["Name"] = $dbName;
+                $_SESSION["ID"] = $dbUserID;
+                $_SESSION["Role"] = $Role;
+
+                $op = "has logged into the system";
+                AddLog($dbUserID, $op);
+
+                if ($dbEmail === "Admin@gmail.com") {
+                    header("Location: ../Dashboard/AdminDashboard.php");
+                } else {
+                    header("Location: ../Dashboard/CleintDashboard.php");
                 }
-            
+                exit();
+            }
         }
-        $stmt->close();
-}   
+    }
+    $stmt->close();
+}
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -72,21 +71,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <title>Login</title>
 </head>
 <body>
-    
     <div class="container d-flex justify-content-center align-items-center min-vh-100">
         <div class="card p-4" style="width: 22rem;">
             <div class="card-body text-center">
                 <h3 class="card-title mb-5 fs-2">Login</h3>
-                <?php if (!empty($_SESSION['message']) ): ?>
+                <?php if (!empty($_SESSION['message'])): ?>
                     <div class="alert alert-success" role="alert">
                         <?php echo $_SESSION['message'];
-                            unset($_SESSION['message']); ?>
+                        unset($_SESSION['message']); ?>
                     </div>
                 <?php endif; ?>
-                <?php if (!empty($message) ): ?>
+                <?php if (!empty($message)): ?>
                     <div class="alert alert-danger" role="alert">
                         <?php echo $message; ?>
-                        <?php $message= ''; ?>
                     </div>
                 <?php endif; ?>
                 <form action="" method="post" autocomplete="off">
@@ -108,6 +105,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
     </div>
     <script src="/jquery/jquery-3.7.1.min.js"></script>
-    
 </body>
 </html>

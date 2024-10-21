@@ -86,10 +86,11 @@ if ($row['Count'] == 0)
         $adminStatus = "active";
         $adminEmail = "Admin@gmail.com";
         $Password="Admin12";
+        $hashedPassword=password_hash( $Password, PASSWORD_DEFAULT);
     $sql="INSERT INTO USERS (Nom,Droit,Etat,Email,Password)
             VALUES (?,?,?,?,?)";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("sssss", $adminName, $adminRole, $adminStatus, $adminEmail, $Password);
+    $stmt->bind_param("sssss", $adminName, $adminRole, $adminStatus, $adminEmail, $hashedPassword);
     $stmt->execute();
     $stmt->close();
 }

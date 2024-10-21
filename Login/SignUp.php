@@ -16,12 +16,17 @@ $style = '';
 $Etat="user";
 $Droit="desactive";
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $email = $_POST["Email"];
-    $Name = $_POST["Name"];
-    $Password = $_POST["Password"];
-    $ConfirmPassword = $_POST["Confirmpassword"];
-    $Etat="desactive";
-    $Droit="user";
+    $email = htmlspecialchars($_POST["Email"], ENT_QUOTES, 'UTF-8');
+    $Name = htmlspecialchars($_POST["Name"], ENT_QUOTES, 'UTF-8');
+    $Password = htmlspecialchars($_POST["Password"], ENT_QUOTES, 'UTF-8');
+    $ConfirmPassword = htmlspecialchars($_POST["Confirmpassword"], ENT_QUOTES, 'UTF-8');
+    $Etat = "desactive";
+    $Droit = "user";
+
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    die("Invalid email format.");
+    }
+
     if ($Password != $ConfirmPassword) {
         $message = "Passwords do not match!";
         $style = "danger";

@@ -19,7 +19,7 @@ function AllMission($userID) {
                         <input type="hidden" name="ID" value="' . $row["id"] . '">
                         <td><button type="submit" class="btn btn-success" name="actionShowTasks">Tasks</button></td>
                         <td><button type="submit" class="btn btn-danger"  name="actionDelete" value="delete">Delete</button></td>
-                        <td><button type="button" class="btn btn-warning" name="actionUpdate" value="Update">Update</button></td>
+                        <td><button type="button" class="btn btn-warning" onclick="showUpdateForm(' . $row["id"] . ', \'' . htmlspecialchars($row["Nom"]) . '\', \'' . htmlspecialchars($row["Desc"]) . '\')">Update</button></td>
                         <td><button type="submit" class="btn btn-primary" name="actionShare" value="Share">Share</button></td>
                     </form>
                 </tr>';
