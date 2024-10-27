@@ -3,6 +3,7 @@
 
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    
     if (isset($_POST['associate_task'])) {
         $task_id = $_POST['task_id'];
         $mission_id = $_POST['mission_id'];
@@ -39,6 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <div class="content">
         <h4>Associer une tâche à une mission</h4>
         <form method="POST">
+
             <div class="form-group">
                 <label for="task_id">Tâche :</label>
                 <select class="form-control" id="task_id" name="task_id" required>

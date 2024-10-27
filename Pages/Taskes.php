@@ -1,5 +1,6 @@
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    
     if (isset($_POST["AddTask"])) {
         $NomT = $_POST["NomT"];
         $DescT = $_POST["DescT"];
@@ -127,7 +128,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <form action="" method="post">
             <input type="hidden"  name="AddTask">
 
-            <!-- Task Name and Résultat on the same line -->
             <div class="row mb-3">
                 <div class="col-md-6">
                     <input type="text" class="form-control" placeholder="Task Name" name="NomT" required>

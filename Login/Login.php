@@ -14,6 +14,9 @@ include("../Functions/Log.php");
 
 $message = "";
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if (!hash_equals($_SESSION['csrf_token'], $_POST['csrf_token'])) {
+        die("Invalid CSRF token");
+    }
     $Email = $_POST["Email"];
     $Password = htmlspecialchars($_POST["Password"],ENT_QUOTES, 'UTF-8');
 
@@ -87,6 +90,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     </div>
                 <?php endif; ?>
                 <form action="" method="post" autocomplete="off">
+                <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
+
                     <div class="form-group mb-2">
                         <input type="text" class="form-control" placeholder="Email" name="Email" required>
                     </div>

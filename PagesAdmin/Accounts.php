@@ -1,6 +1,7 @@
 <?php
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['activation'])) {
+
         $userID = $_POST['user_id'];
         $action = $_POST['activation'];
         $Status = ($action === 'active') ? 'active' : 'desactive';

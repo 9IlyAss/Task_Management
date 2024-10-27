@@ -4,6 +4,7 @@ $style = '';
 $selectedMissionID = null; 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    
     if (isset($_POST["actionDelete"])) {
         $_SESSION["success"] = DeleteMission($_SESSION["ID"], $_POST["ID"]);
     }
@@ -73,6 +74,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <div class="task-container mt-4">
         <h2>Tasks for Mission ID: <?php echo htmlspecialchars($selectedMissionID); ?></h2>
         <form method="post">
+        <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
             <input type="hidden" name="ID" value="<?php echo htmlspecialchars($selectedMissionID); ?>">
             <button type="submit" class="btn btn-danger" name="actionHideTasks">Close</button>
         </form>
@@ -97,6 +99,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <div id="updateForm">
         <h3>Update Mission</h3>
         <form action="" method="POST">
+
             <input type="hidden" name="ID" value="">
             <div class="form-group mb-3">
                 <label for="missionName" class="form-label">Mission Name</label>

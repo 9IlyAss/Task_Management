@@ -1,6 +1,7 @@
 <?php
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        
         $name=$_POST["Nom"];
         $Description=$_POST["Desc"];
         AddMission($_SESSION["ID"], $name, $Description);
@@ -46,6 +47,7 @@
             <h2 class="form-title">Create Mission</h2>
 
             <form action="" method="post">
+
                 <div class="form-group mb-3">
                     <label for="missionName" class="form-label">Mission Name</label>
                     <input type="text" class="form-control" id="missionName" name="Nom" placeholder="Enter mission name" required>
