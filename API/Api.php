@@ -12,15 +12,15 @@ switch ($requestMethod) {
         $Api->Create();
         break;
     case 'GET':
-        if (preg_match('/\/api\/(\d+)/', $requestUri, $matches)) {
-            $Api->read($matches[1]);
+        if (preg_match('/(\d+)/', $requestUri, $matches)) {
+            $Api->Read($matches[1]);
         } else {
             http_response_code(404);
             echo json_encode(["message" => "Task not found"]);
         }
         break;
     case 'PUT':
-        if (preg_match('/\/api\/(\d+)/', $requestUri, $matches)) {
+        if (preg_match('/(\d+)/', $requestUri, $matches)) {
             $Api->update($matches[1]);
         } else {
             http_response_code(404);
@@ -28,7 +28,7 @@ switch ($requestMethod) {
         }
         break;
     case 'DELETE':
-        if (preg_match('/\/api\/(\d+)/', $requestUri, $matches)) {
+        if (preg_match('/(\d+)/', $requestUri, $matches)) {
             $Api->delete($matches[1]);
         } else {
             http_response_code(404);
